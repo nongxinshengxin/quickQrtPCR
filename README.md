@@ -1,61 +1,48 @@
-# RNAdiffAPP
+# quickQrtPCR
 ## Introduction
-### What is RNAdiff App ?
-This app is used to perform **RNA-Seq downstream analysis** and is available to the user through an interactive interface.
-### How is this RNAdiff App built ?
-The app is built on the R language and shiny packages, calling DESeq2, edgeR, ggplot2 and other R packages.
-### What can the RNAdiff App do ?
-The app is divided into five main sections.<br/>
-- *__Function 1:__ Analysis of differentially expressed genes, which can be performed using both DESeq2 and edgeR methods.*<br/>
-- *__Function 2:__ Plotting volcano maps, based on the results of differentially expressed gene analysis.*<br/>
-- *__Function 3:__ Calculating TPM and plotting heatmap, or only plotting heatmap.*<br/>
-- *__Function 4:__ GO or KEGG enrichment analysis. Enrichment analysis based on the clusterProfiler package.*<br/>
-- *__Function 5:__ Plotting bubble maps, based on the results of GO or KEGG enrichment analysis.*<br/>
+#### What is quickQrtPCR ?
+quickQrtPCR is a shiny APP which can calculate qrtPCR results from Ct values.  
+#### How is this App built ?
+Relative expression of genes is calculated using the 2<sup>-ΔΔCt</sup> method.
+#### What can the App do ?
+Simply enter the excel sheet containing the Ct values and output the calculated relative expressions.
+
+**Note**: your input form needs to meet the following requirements.
+
+- <font size=4 >The first column is the sample column. And the first sample must be used as "Control" Set.</font>
+- <font size=4 >The second column shows the Ct values of reference gene.</font>
+- <font size=4 >Starting from the third column, each column represents a gene.</font>
+
+![](/image/img0.png)
+
 ## Installation
-Before installing this App, you will need to install some **dependent R packages** on your R.
+Before installing this App, you will need to install **devtools** on your R.
 
 ```{r}
-if (!require("BiocManager"))
-  install.packages("BiocManager")
-library(BiocManager)
-if (!require("DESeq2"))
-  BiocManager::install("DESeq2")
-if (!require("edgeR"))
-  BiocManager::install("edgeR")
-if (!require("clusterProfiler"))
-  BiocManager::install("clusterProfiler")
 if (!require("devtools"))
   install.packages("devtools")
 ```
-Once you have completed the installation of the dependencies, start downloading and installing the RNAdiffAPP.
+Once you have completed the installation of `devtools`, start downloading and installing quickQrtPCR.
 ```{r}
-devtools::install_github("nongxinshengxin/RNAdiffAPP")
+devtools::install_github("nongxinshengxin/quickQrtPCR")
 ```
-Once the installation is complete, run `RNAdiffAPP::run_app()` to open the APP page.
+Once the installation is complete, run `quickQrtPCR::run_app()` to open the APP page.
 ## APP Interface
-Analysis of differentially expressed genes
+Home page
 
 ![Alt1](/image/img1.png)
 
-Plotting volcano maps
+Function page
 
 ![Alt2](/image/img2.png)
 
-Calculating TPM and plotting heatmap
-
-![Alt1](/image/img3.png)
-
-GO or KEGG enrichment analysis
-
-![Alt1](/image/img4.png)
-
-Plotting bubble maps
-
-![Alt1](/image/img5.png)
 ## Documentation
-The English documentation is available in - <https://github.com/nongxinshengxin/RNAdiffAPP>
+The English documentation is available in - <https://github.com/nongxinshengxin/quickQrtPCR>
 
 The Chinese documentation is available in - 微信公众号**农心生信工作室**
+
+## Citation
+Please, when using `quickQrtPCR`, cite us using the reference: https://github.com/nongxinshengxin/quickQrtPCR
 
 ## Contact us
 - Email: nongxinshengxin@163.com
