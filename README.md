@@ -1,5 +1,6 @@
 # quickQrtPCR
 [![shiny](https://img.shields.io/badge/ShinyApp_web-ready-red.svg)](https://nongxinshengxinapp.shinyapps.io/quickqrtpcr/)
+[English](README.md) | [Chinese](CH.md)
 ## Introduction
 #### What is quickQrtPCR ?
 quickQrtPCR is a shiny APP which can calculate qrtPCR results from Ct values.  
