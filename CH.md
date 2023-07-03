@@ -1,3 +1,6 @@
+# quickQrtPCR
+
+[中文](CH.md) | [英文](README.md)
 ## APP介绍
 ### 什么是quickQrtPCR ?
 quickQrtPCR是一款shiny app，可以根据实时荧光定量PCR（Quantitative Real-time PCR）下机产生的Ct（cycle threshold：QPCR扩增过程中，扩增产物的荧光信号达到设定的荧光阈值时所对应的扩增循环数）值，计算不同样本基因的相对表达量。 
