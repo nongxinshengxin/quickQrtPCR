@@ -36,6 +36,17 @@ Function page
 
 ![Alt2](/image/img2.png)
 
+Change color palette
+
+![Alt3](/image/img3.png)
+
+Significance test 
+
+![Alt4](/image/img4.png)
+
+## Web Version
+quickQrtPCR also has a web version. You can log on to https://nongxinshengxinapp.shinyapps.io/quickqrtpcr/ to get the full service of the app.
+
 ## Documentation
 The English documentation is available in - <https://github.com/nongxinshengxin/quickQrtPCR>
 
