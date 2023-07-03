@@ -58,7 +58,7 @@ devtools::install_github("nongxinshengxin/quickQrtPCR")
 ![Alt4](/image/img4.png)
 
 ## Web版本
-quickQrtPCR也拥有在线web版本。你可以登录 https://nongxinshengxinapp.shinyapps.io/quickqrtpcr/，来获取APP的全部功能。
+quickQrtPCR也拥有在线web版本。你可以登录 https://nongxinshengxinapp.shinyapps.io/quickqrtpcr/ ，来获取APP的全部功能。
 
 ## 说明文档
 英文文档首发于 - <https://github.com/nongxinshengxin/quickQrtPCR>
