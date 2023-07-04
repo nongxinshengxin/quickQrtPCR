@@ -52,13 +52,13 @@ app_server <- function(input,output) {
     ###绘制
     delta<-pivot_longer(qrtmat(),-Sample,names_to = "gene")
     if (input$test==TRUE){
-      ggbarplot(delta,x="Sample",y="value",fill="Sample",add="mean_se_",facet.by = "gene",palette=input$palette,
+      ggpubr::ggbarplot(delta,x="Sample",y="value",fill="Sample",add="mean_se_",facet.by = "gene",palette=input$palette,
                 position = position_dodge(0.8))+
         xlab("")+
         ylab("Relative Expression")+
         stat_compare_means(aes(group = Sample), label = "p.signif",method = input$method,ref.group = input$refgroup)
     }else{
-      ggbarplot(delta,x="gene",y="value",fill="Sample",add="mean_se_",palette=input$palette,
+      ggpubr::ggbarplot(delta,x="gene",y="value",fill="Sample",add="mean_se_",palette=input$palette,
                 position = position_dodge(0.8))+
         xlab("")+
         ylab("Relative Expression")
@@ -89,7 +89,7 @@ app_server <- function(input,output) {
     })
   
   
-  ##下载tpm
+  ##下载
   output$download_qrt<-downloadHandler(filename = function() {paste("QrtPCR", Sys.Date(), ".csv", sep="")},content=function(file) {
     write.csv(qrtmat(), file)
   })
