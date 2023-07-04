@@ -9,6 +9,7 @@
 #' @noRd
 app_server <- function(input,output) {
   options(shiny.maxRequestSize = 30 * 1024^2)
+  library(ggpubr)
   
   qrtmat<-eventReactive(input$start,{
     rawmat<-input$inputfile
