@@ -51,7 +51,6 @@ app_server <- function(input,output) {
   drawbar<-reactive({
     ###绘制
     delta<-pivot_longer(qrtmat(),-Sample,names_to = "gene")
-    mean_se_ <- ggpubr::mean_se_
     if (input$test==TRUE){
       ggpubr::ggbarplot(delta,x="Sample",y="value",fill="Sample",add="mean_se_",facet.by = "gene",palette=input$palette,
                 position = position_dodge(0.8))+
