@@ -8,7 +8,7 @@
 #' @noRd
 app_ui <- function(request) {
   # Define UI for application
-  navbarPage(title=div(a("quickQrtPCR v0.1.0")),
+  navbarPage(title=div(a("quickQrtPCR v0.2.0")),
              theme = shinytheme("flatly"),
              tabPanel("Home", sidebarLayout(
                sidebarPanel(h3("quickQrtPCR",style = "font-family: 'times'"),
@@ -31,7 +31,7 @@ app_ui <- function(request) {
              tabPanel("qrtPCR",sidebarLayout(
                sidebarPanel(
                  fileInput("inputfile", "Choose Table File"),
-                 selectInput("skiprow","Minimum number of row to skip",choices = c(0,1)),
+                 checkboxInput('header', 'ColName', TRUE),
                  br(),
                  actionButton("start","Start")
                ),
@@ -55,6 +55,18 @@ app_ui <- function(request) {
                  )
                )))
              ,
+             tabPanel("Efficiency",sidebarLayout(
+               sidebarPanel(
+                 fileInput("inputfile2", "Choose Xlsx File"),
+                 checkboxInput('header2', 'ColName', TRUE),
+                 br(),
+                 actionButton("start2","Start")
+               ),
+               mainPanel(
+                 div(helpText("Show the LM plot in this view."),plotOutput("plot_lm"),
+                     helpText("Show the amplification efficiency in this view."),textOutput("Evalue"))
+               ))),
+             
              div(div(p("Copyright © nongxinshengxin 2023. All rights reserved. Designed by Cy.")),style= "margin-top:20px;width: 100%;height: 65px;text-align:center;color: black;position: absolute;bottom:5px")
              
   )

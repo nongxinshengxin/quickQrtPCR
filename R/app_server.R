@@ -9,13 +9,13 @@
 #' @noRd
 app_server <- function(input,output) {
   options(shiny.maxRequestSize = 30 * 1024^2)
-  library(ggpubr)
   
   qrtmat<-eventReactive(input$start,{
     rawmat<-input$inputfile
     if (is.null(rawmat))
       return(NULL)
-    df <- read_excel(path =  rawmat$datapath,skip = as.numeric(input$skiprow))
+    df <- readxl::read_excel(path =  rawmat$datapath,col_names = input$header)
+    oldgeneid<-colnames(df)[3:ncol(df)]
     colnames(df)<-c("Sample","keeper",paste("gene",seq(1:(ncol(df)-2)),sep = ""))
     
     CKname<-as.character(df[1,1])
@@ -35,6 +35,7 @@ app_server <- function(input,output) {
     }
     
     delta<-delta%>%select(Sample,contains("gene"))
+    colnames(delta)[2:ncol(df)]<-oldgeneid
     delta
     
   })
@@ -94,6 +95,54 @@ app_server <- function(input,output) {
   output$download_qrt<-downloadHandler(filename = function() {paste("QrtPCR", Sys.Date(), ".csv", sep="")},content=function(file) {
     write.csv(qrtmat(), file)
   })
+
   
+  ###第二部分
+  plotdf<-eventReactive(input$start2,{
+    rawmat<-input$inputfile2
+    if (is.null(rawmat))
+      return(NULL)
+    df <- readxl::read_excel(path =  rawmat$datapath,col_names = input$header2)
+    colnames(df)<-c("Ct","dilution")
+    lmformula<-lm(df$Ct~log10(df$dilution))
+    df
+  })
+  
+  ##plot
+  drawpoint<-reactive({
+    ###热图绘制
+    df<-plotdf()
+    k<-as.numeric(lmformula$coefficients[2])
+    b<-as.numeric(lmformula$coefficients[1])
+    ggplot(df,aes(x=log10(dilution),y=Ct))+
+      geom_point(size=1.5)+
+      geom_smooth(method = "lm")+
+      labs(title = paste("y=",k,"x","+",b,sep = ""))+
+      theme_bw()
+  })
+  
+  
+  output$plot_lm<-renderPlot({
+    if (is.null(drawpoint()))
+      return(NULL)
+    drawpoint()
+  })
+  
+  ##text
+  Etext<-reactive({
+    df<-plotdf()
+    k<-as.numeric(lmformula$coefficients[2])
+    e<-(10**(-1/k)-1)*100
+    ev<-paste(e,"%")
+    ev
+  })
+  
+  
+  output$Evalue<-renderText({
+    if (is.null(Etext()))
+      return(NULL)
+    Etext()
+  })
+    
   
 }
