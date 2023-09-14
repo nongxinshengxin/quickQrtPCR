@@ -30,7 +30,7 @@ app_ui <- function(request) {
              ),
              tabPanel("qrtPCR",sidebarLayout(
                sidebarPanel(
-                 fileInput("inputfile", "Choose Table File"),
+                 fileInput("inputfile", "Choose Excel File"),
                  checkboxInput('header', 'ColName', TRUE),
                  br(),
                  actionButton("start","Start")
@@ -57,7 +57,7 @@ app_ui <- function(request) {
              ,
              tabPanel("Efficiency",sidebarLayout(
                sidebarPanel(
-                 fileInput("inputfile2", "Choose Xlsx File"),
+                 fileInput("inputfile2", "Choose Excel File"),
                  checkboxInput('header2', 'ColName', TRUE),
                  br(),
                  actionButton("start2","Start")

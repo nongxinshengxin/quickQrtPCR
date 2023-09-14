@@ -104,7 +104,6 @@ app_server <- function(input,output) {
       return(NULL)
     df <- readxl::read_excel(path =  rawmat$datapath,col_names = input$header2)
     colnames(df)<-c("Ct","dilution")
-    lmformula<-lm(df$Ct~log10(df$dilution))
     df
   })
   
@@ -112,6 +111,7 @@ app_server <- function(input,output) {
   drawpoint<-reactive({
     ###热图绘制
     df<-plotdf()
+    lmformula<-lm(df$Ct~log10(df$dilution))
     k<-as.numeric(lmformula$coefficients[2])
     b<-as.numeric(lmformula$coefficients[1])
     ggplot(df,aes(x=log10(dilution),y=Ct))+
@@ -131,6 +131,7 @@ app_server <- function(input,output) {
   ##text
   Etext<-reactive({
     df<-plotdf()
+    lmformula<-lm(df$Ct~log10(df$dilution))
     k<-as.numeric(lmformula$coefficients[2])
     e<-(10**(-1/k)-1)*100
     ev<-paste(e,"%")
